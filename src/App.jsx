@@ -1,13 +1,21 @@
 import { useState } from 'react'
 import './App.css'
+import Header from './components/Header'
+import Formulario from './components/Formulario'
+import ListadoPacientes from './components/ListadoPacientes'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1 className="text-red-600 text-3xl">  hola.. mundo</h1>
-    </>
+    <div className="container mx-auto mt-20">
+      <Header/>
+      <div className="md:flex mt-10">
+        <Formulario />
+        <ListadoPacientes />
+      </div>
+    </div>
+    
+    
   )
 }
 
