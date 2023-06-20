@@ -1,17 +1,23 @@
-import React from 'react'
-import Paciente from './Paciente'
+import React from "react";
+import Paciente from "./Paciente";
 
-const ListadoPacientes = () => {
+const ListadoPacientes = ({ pacientes }) => {
   return (
     <div className="block md:w-2/3 text-center">
       <h2 className="text-3xl font-bold my-3">No hay pacientes</h2>
       <p>
         Comienza agregando pacientes {""}
-        <span className='text-indigo-600'>y apareceran en este lugar</span>
+        <span className="text-indigo-600">y apareceran en este lugar</span>
       </p>
-      <Paciente />
-    </div>
-  )
-}
+      {pacientes.map((paciente) => (
+        <Paciente 
+          paciente={paciente} 
+        />
+      ))}
 
-export default ListadoPacientes
+
+    </div>
+  );
+};
+
+export default ListadoPacientes;

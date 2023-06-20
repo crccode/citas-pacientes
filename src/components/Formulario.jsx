@@ -3,7 +3,7 @@ import React from "react";
 import Error from './Error';
 
 
-const Formulario = () => {
+const Formulario = ({ pacientes,setPacientes}) => {
   // ALMACENA LOS DATOS INTRODUCIDOS POR EL USUARIO
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
@@ -20,6 +20,23 @@ const Formulario = () => {
       return
     }
     setError(false);
+
+    // GENERAR ID
+    const generarId = () => {
+      const random = Math.random().toString(36).substr(2);
+      const fecha = Date.now().toString(36);
+      return random + fecha
+    }
+    // CREAMOS UN OBJETO Y ALMACENAMOS 
+    const objetoPaciente = {
+      nombre,
+      propietario,
+      email,
+      alta,
+      sintomas
+    }
+    objetoPaciente.id = generarId();
+    setPacientes([...pacientes, objetoPaciente]);
     // REINICIAMOS TODOS LOS COMPONENTES
     setNombre('')
     setPropietario('')
@@ -114,7 +131,9 @@ const Formulario = () => {
           />
         </div>
         {/* BOTON */}
-        <button className="bg-indigo-600 uppercase text-center font-bold text-white text-sm p-3 rounded-xl w-full">
+        <button 
+          type='submit'
+          className="bg-indigo-600 uppercase text-center font-bold text-white text-sm p-3 rounded-xl w-full">
           Agregar Pacientes
         </button>
       </form>
