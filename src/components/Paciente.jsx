@@ -1,6 +1,6 @@
 import React from "react";
 
-const Paciente = ({paciente}) => {
+const Paciente = ({paciente, setPaciente}) => {
   const {nombre, propietario, email, alta, sintomas, id} = paciente
   return (
     <div className="bg-white m-2 px-5 py-10 rounded-xl">
@@ -28,6 +28,23 @@ const Paciente = ({paciente}) => {
         Sintomas. {""}
         <span className="font-normal normal-case ">{sintomas}</span>
       </p>
+
+      {/* BOTON EDITAR Y ELIMINAR */}
+      <div className="flex justify-between">
+        <button          
+          type="button"
+          className="px-10 py-2  hover:bg-indigo-950 text-white bg-indigo-600 font-bold
+          rounded-md text-center uppercase text-2xl"
+          onClick={() => setPaciente(paciente)}
+        >Editar</button>
+        <button 
+          type="button"
+          className="px-10 py-2 hover:bg-red-950 text-white bg-red-600 font-bold
+          rounded-md text-center uppercase text-2xl "
+          // onClick={() => eliminarPaciente(id)}
+          // onClick={handleEliminar}
+        >Eliminar</button>
+      </div>
 
     </div>
   );

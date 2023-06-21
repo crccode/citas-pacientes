@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from "react";
 import Error from './Error';
 
 
-const Formulario = ({ pacientes,setPacientes}) => {
+const Formulario = ({ pacientes,setPacientes, paciente, setPaciente}) => {
   // ALMACENA LOS DATOS INTRODUCIDOS POR EL USUARIO
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
@@ -35,8 +35,21 @@ const Formulario = ({ pacientes,setPacientes}) => {
       alta,
       sintomas
     }
-    objetoPaciente.id = generarId();
-    setPacientes([...pacientes, objetoPaciente]);
+    // SI PACIENTE TIENE UN ELEMENTO
+    if(paciente.id){
+      // COLOCAMOS EL ID AL OBJETO QUE ESTA EN EL FORMULARIO
+      objetoPaciente.id = paciente.id
+      // CREAMOS UN NUEVOS ARRAY Y COLOCAMOS EL OBJETO EDITADO
+      const pacienteActualizados = pacientes.map( pacienteState => paciente.id === pacienteState.id?
+        objetoPaciente: pacienteState)
+
+      setPacientes(pacienteActualizados);
+      setPaciente({})
+    }else{
+      // NUEVO REGISTRO
+      objetoPaciente.id = generarId();
+      setPacientes([...pacientes, objetoPaciente]);
+    }
     // REINICIAMOS TODOS LOS COMPONENTES
     setNombre('')
     setPropietario('')
@@ -45,6 +58,18 @@ const Formulario = ({ pacientes,setPacientes}) => {
     setSintomas('')
   
   }
+  // USE EFFECT SE VA A EJECUTAR CADA VEZ QUE SE SELECCIONE UN PACIENTE
+  useEffect( () => {
+    //VERIFICAMOS QUE EL ELEMENTO SELECCIONADO NO ESTE VACIO
+    if (Object.keys(paciente).length>0){
+      setNombre(paciente.nombre)
+      setPropietario(paciente.propietario)
+      setEmail(paciente.email)
+      setAlta(paciente.alta)
+      setSintomas(paciente.sintomas)
+    }
+  }, [paciente])
+
   return (
     <div className="block md:w-1/3 text-center">
       <h2 className="text-3xl font-bold my-3">Seguimientos Pacientes</h2>
@@ -131,11 +156,12 @@ const Formulario = ({ pacientes,setPacientes}) => {
           />
         </div>
         {/* BOTON */}
-        <button 
+        <input
           type='submit'
-          className="bg-indigo-600 uppercase text-center font-bold text-white text-sm p-3 rounded-xl w-full">
-          Agregar Pacientes
-        </button>
+          className="uppercase bg-indigo-600 w-full text-white text-center p-2 hover:bg-indigo-700 cursor-pointer transition-colors"
+          value= { paciente.id ? 'Editar paciente' : 'Agregar paciente'}
+        />
+   
       </form>
     </div>
   );

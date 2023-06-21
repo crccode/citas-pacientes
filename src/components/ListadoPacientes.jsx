@@ -1,7 +1,8 @@
 import React from "react";
 import Paciente from "./Paciente";
 
-const ListadoPacientes = ({ pacientes }) => {
+const ListadoPacientes = ({ pacientes, setPaciente }) => {
+  
   return (
     <div className="block md:w-2/3 text-center">
       <h2 className="text-3xl font-bold my-3">No hay pacientes</h2>
@@ -11,7 +12,8 @@ const ListadoPacientes = ({ pacientes }) => {
       </p>
       {pacientes.map((paciente) => (
         <Paciente 
-          paciente={paciente} 
+          paciente = {paciente} 
+          setPaciente = {setPaciente}
         />
       ))}
 
