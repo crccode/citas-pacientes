@@ -2,25 +2,39 @@ import React from "react";
 import Paciente from "./Paciente";
 
 const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
-  
   return (
-    <div className="block md:w-2/3 text-center">
-      <h2 className="text-3xl font-bold my-3">No hay pacientes</h2>
-      <p>
-        Comienza agregando pacientes {""}
-        <span className="text-indigo-600">y apareceran en este lugar</span>
-      </p>
-      {pacientes.map((paciente) => (
-        <Paciente 
-          key = {paciente.id}
-          paciente = {paciente} 
-          setPaciente = {setPaciente}
-
-          eliminarPaciente = {eliminarPaciente}
-        />
-      ))}
-
-
+    <div className="md:w-1/2 lg:w-3/5 md-h-screen overflow-y-scroll">
+      {pacientes && pacientes.length ? (
+        <>
+          <h2 className="font-black text-3xl text-center">
+            Listado de Pacientes
+          </h2>
+          <p className="text-center mt-5 mb-10">
+            Administra tus {""}
+            <span className="text-indigo-600 font-bold">Pacientes y Citas</span>
+          </p>
+          {pacientes.map((paciente) => (
+            <Paciente
+              // ESTE KEY DEBE SER UNICO Y DEBE TENERLO TODOS LOS PACIENTES
+              key={paciente.id}
+              paciente={paciente}
+              setPaciente={setPaciente}
+              eliminarPaciente={eliminarPaciente}
+            />
+          ))}
+          -
+        </>
+      ) : (
+        <>
+          <h2 className="font-black text-3xl text-center">No hay Pacientes</h2>
+          <p className="text-center mt-5 mb-10">
+            Comienza agregando pacientes {""}
+            <span className="text-indigo-600 font-bold">
+              y aparecera en este lugar
+            </span>
+          </p>
+        </>
+      )}
     </div>
   );
 };
