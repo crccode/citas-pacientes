@@ -71,11 +71,11 @@ const Formulario = ({ pacientes,setPacientes, paciente, setPaciente}) => {
   }, [paciente])
 
   return (
-    <div className="block md:w-1/3 text-center">
-      <h2 className="text-3xl font-bold my-3">Seguimientos Pacientes</h2>
-      <p>
-        Añade Paceintes y {""}
-        <span className="text-indigo-600">Administralos</span>
+    <div className="md:w-1/2 lg:w-2/5">
+      <h2 className='font-black text-3xl text-center'>Seguimiento de Pacientes</h2>
+      <p className=' mt-5 text-center mb-10 '>
+        Añade Pacientes {""}
+        <span className='text-indigo-600'>Administralos</span>
       </p>
       <form
         className="bg-white shadow-md rounded-lg py-10 px-3 mb-10 mx-5"
